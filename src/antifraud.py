@@ -6,7 +6,7 @@ import pprint
 def make_tree():
     with open("batch_payment.csv", encoding="utf-8") as batchfile:
         graph = dict()
-        # for i, n_line in zip(range(1969207), batchfile):
+        #for i, n_line in zip(range(1969207), batchfile):
         for line in batchfile:
             tempstring = batchfile.readline()
             # print(tempstring)
@@ -22,17 +22,34 @@ def make_tree():
 
 def traverse_tree(graph):
     with open("stream_payment.csv", encoding="utf-8") as streamfile:
-        # do a breadth first search
-        print(streamfile.readline())
-        tempstring = streamfile.readline()
-        print(tempstring)
-        A = tempstring.split(", ")[1]
-        B = tempstring.split(", ")[2]
-        print(bfs(graph, A, B))
+        # for i, n_line in zip(range(7), streamfile):
+        for line in streamfile:
+            tempstring = streamfile.readline()
+            # print(tempstring)
+            if len(tempstring.split(", ")) == 5:
+                A = tempstring.split(", ")[1]
+                B = tempstring.split(", ")[2]
+                feature = bfs(graph, A, B)
+                with open('output1.txt', 'a') as outfile:
+                    if feature[0] == 1:
+                        outfile.write('trusted\n')
+                    else:
+                        outfile.write('unverified\n')
+                with open('output2.txt', 'a') as outfile:
+                    if feature[1] == 1:
+                        outfile.write('trusted\n')
+                    else:
+                        outfile.write('unverified\n')
+                with open('output3.txt', 'a') as outfile:
+                    if feature[2] == 1:
+                        outfile.write('trusted\n')
+                    else:
+                        outfile.write('unverified\n')
 
 def bfs(graph, start, end):
     # counter for depth of tree
     level = 0
+    feat = [0, 0, 0]
     # maintain a queue of paths
     queue = list()
     # push the root into the queue
@@ -50,19 +67,23 @@ def bfs(graph, start, end):
         # get the last node from the path
         node = path[-1]
         # path found or condition met
+        if level == 1 and node == end:
+            feat[0] = 1
+        if level <= 2 and node == end:
+            feat[1] = 1
         if level > 4:
-            return 'Unverified'
-        if node == end:
-            # print(path)
-            return 'Verified'
+            break
+        if level < 5 and node == end:
+            #print(level)
+            #print(path)
+            feat[2] = 1
+            break
         # enumerate all adjacent nodes, construct a new path and push it into the queue
         for adjacent in graph.get(node, []):
             new_path = list(path)
             new_path.append(adjacent)
             queue.append(new_path)
-    # if no connection exists
-    if queue == []:
-        return "Unverified"
+    return feat
 
 # main
 data = make_tree()
