@@ -1,10 +1,11 @@
 # Leon Zhu
 
+import sys
 # to print a dictionary nicely
 import pprint
 
 def make_tree():
-    with open("batch_payment.csv", encoding="utf-8") as batchfile:
+    with open(sys.argv[1], encoding="utf-8") as batchfile:
         graph = dict()
         #for i, n_line in zip(range(1969207), batchfile):
         for line in batchfile:
@@ -21,7 +22,7 @@ def make_tree():
         return graph
 
 def traverse_tree(graph):
-    with open("stream_payment.csv", encoding="utf-8") as streamfile:
+    with open(sys.argv[2], encoding="utf-8") as streamfile:
         # for i, n_line in zip(range(7), streamfile):
         for line in streamfile:
             tempstring = streamfile.readline()
@@ -30,17 +31,17 @@ def traverse_tree(graph):
                 A = tempstring.split(", ")[1]
                 B = tempstring.split(", ")[2]
                 feature = bfs(graph, A, B)
-                with open('output1.txt', 'a') as outfile:
+                with open(sys.argv[3], 'a') as outfile:
                     if feature[0] == 1:
                         outfile.write('trusted\n')
                     else:
                         outfile.write('unverified\n')
-                with open('output2.txt', 'a') as outfile:
+                with open(sys.argv[4], 'a') as outfile:
                     if feature[1] == 1:
                         outfile.write('trusted\n')
                     else:
                         outfile.write('unverified\n')
-                with open('output3.txt', 'a') as outfile:
+                with open(sys.argv[5], 'a') as outfile:
                     if feature[2] == 1:
                         outfile.write('trusted\n')
                     else:
