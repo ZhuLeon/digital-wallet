@@ -1,0 +1,9 @@
+time, id1, id2, amount, message
+t, 8, 4, a, m
+t, 1, 5, a, m
+t, 5, 14, a, m
+t, 1, 13, a, m
+t, 11, 1, a, m
+t, 3, 14, a, m
+t, 2, 16, a, m
+t, 1, 15, a, m
