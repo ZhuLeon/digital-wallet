@@ -1,16 +1,12 @@
 # Leon Zhu
 
 import sys
-# to print a dictionary nicely
-import pprint
 
 def make_tree():
     with open(sys.argv[1], encoding="utf-8") as batchfile:
         next(batchfile)
         graph = dict()
-        #for i, n_line in zip(range(1969207), batchfile):
         for line in batchfile:
-            # print(line)
             if len(line.split(", ")) == 5:
                 A = line.split(", ")[1]
                 B = line.split(", ")[2]
@@ -23,15 +19,12 @@ def make_tree():
                     graph[B].append(A)
                 else:
                     graph[B] = [A]
-        # pprint.pprint(graph)
         return graph
 
 def traverse_tree(graph):
     with open(sys.argv[2], encoding="utf-8") as streamfile:
         next(streamfile)
-        #for i, n_line in zip(range(6), streamfile):
         for line in streamfile:
-            # print(n_line)
             if len(line.split(", ")) == 5:
                 A = line.split(", ")[1]
                 B = line.split(", ")[2]
@@ -80,8 +73,6 @@ def bfs(graph, start, end):
         if level > 4:
             break
         if level < 5 and node == end:
-            #print(level)
-            #print(path)
             feat[2] = 1
             break
         # enumerate all adjacent nodes, construct a new path and push it into the queue
