@@ -1,8 +1,8 @@
 # Table of Contents
 
-1. [Summary] (README.md#summary)
-2. [Details of Implementation] (README.md#details-of-implementation)
-3. [Description of Data] (README.md#description-of-data)
+1. [Summary](README.md#summary)
+2. [Details of Implementation](README.md#details-of-implementation)
+3. [Description of Data](README.md#description-of-data)
 
 # Summary
 Suppose a "digital wallet" company called PayMo allows users to easily request and make payments to other PayMo users. The team at PayMo has decided they want to implement features to prevent fraudulent payment requests from untrusted users. While PayMo is a fictional company, the dataset is quite interesting -- it's inspired by a real social network, includes the time of transaction, and the messages come from real Venmo transactions
